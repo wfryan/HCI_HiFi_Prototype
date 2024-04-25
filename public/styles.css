@@ -1,4 +1,6 @@
-
+body{
+    background-color: gray;
+}
 .raid-tile{
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -11,6 +13,10 @@
     background-position: center;
     height: auto;
 
+}
+
+#fireteamMembers{
+    list-style: none;
 }
 
 .raid-grid {
