@@ -11,7 +11,7 @@ window.onload = async function(){
     const raidName = document.getElementById("RaidEventName")
     raidName.appendChild(document.createTextNode(RaidEvent.raid.name.valueOf()))
 
-    const fireteam = document.getElementById("fireteamMembers")
+    const fireteam = document.getElementById("activeFireteamMembers")
     for(let player of RaidEvent.fireteam){
         const tmp = document.createElement("li");
         const lab = document.createElement("label")
