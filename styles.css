@@ -1,0 +1,30 @@
+
+.raid-tile{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+
+}
+
+.raid-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-gap: 20px; /* Spacing between tiles */
+    align-items: center; /* Center items vertically */
+    justify-items: center; /* Center items horizontally */
+}
+.raid-tile:hover{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.raid-tile>img{
+    width:100%;
+    height:auto;
+}
