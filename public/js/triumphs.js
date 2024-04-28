@@ -36,6 +36,8 @@ window.onload = async function(){
     const raidData = await raidResponse.json()
     raid = raidData.Raid
     console.log(raid)
+    const title = document.getElementById("TriumphTitle")
+    title.appendChild(document.createTextNode(raid.sealTitle.valueOf() + " Triumphs"))
     const list = document.getElementById("availableTriumphs")
     for(let triumph of raid.triumphs){
         console.log(triumph)
@@ -43,6 +45,7 @@ window.onload = async function(){
         const tmpIn = defaultIn.cloneNode()
         const lab = document.createElement("label")
         lab.appendChild(document.createTextNode(triumph.name.valueOf()))
+        tmp.setAttribute("title", triumph.description.valueOf())
         tmp.appendChild(lab)
         tmp.appendChild(tmpIn)
         console.log(tmp)
@@ -66,7 +69,6 @@ window.onload = async function(){
                     }
                 }
             }
-            console.log(activeFireteam)
         }
     })
 }

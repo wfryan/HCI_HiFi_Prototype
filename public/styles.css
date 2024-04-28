@@ -15,16 +15,44 @@ body{
 
 }
 
+h3{
+    margin: 0;
+}
+
+#RaidEventNameContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#RaidEventNameContainer h1:nth-child(odd){
+    align-self: center;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-container h3:nth-child(odd) {
+    align-self: flex-start; 
+}
+
+.header-container h3:nth-child(even) {
+    align-self: center; 
+}
+
 #fireteamMembers{
     list-style: none;
 }
 
 .raid-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    grid-gap: 20px; /* Spacing between tiles */
-    align-items: center; /* Center items vertically */
-    justify-items: center; /* Center items horizontally */
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 20px; 
+    align-items: center; 
+    justify-items: center; 
 }
 .raid-tile:hover{
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

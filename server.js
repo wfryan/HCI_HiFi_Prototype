@@ -14,7 +14,7 @@ class Triumph{
 }
 
 class RaidEvent {
-    constructor(raid, fireteam, clan, date=datetime.now(), completedTriumphs) {
+    constructor(raid, fireteam, clan, date= new Date().toUTCString().slice(5,16), completedTriumphs) {
         this.raid = raid;
         this.fireteam = fireteam;
         this.clan = clan;
@@ -121,10 +121,14 @@ const server = http.createServer(function (request, response) {
     handleGet(request, response);
   } else if (request.method === "POST") {
     handlePost(request, response);
-  }else if (request.method === "DELETE") {
-    handleDelete(request, response);
+  } else {
+    request.on("end", function () {
+        retObject = {Raids};
+        console.log(retObject)
+        response.writeHead(200, "OK", { "Content-Type": "text/json" });
+        response.end(JSON.stringify(retObject));
+      });
   }
-  
 });
 
 const handleGet = function (request, response) {
@@ -211,7 +215,7 @@ const handlePost = function (request, response) {
         request.on("end", function (){
             const triumphs = JSON.parse(dataString).selectedTriumphs
             //console.log(triumphs)
-            newEvent = new RaidEvent(Raid, activeFireteam,"Nights Watchmen", new Date(), triumphs)
+            newEvent = new RaidEvent(Raid, activeFireteam,"The Nights Watchmen", new Date().toUTCString().slice(5, 16), triumphs)
             pastEvents.push(newEvent)
             console.log(newEvent)
             response.writeHead(301, {Location: 'http://localhost:3000/event.html'});
@@ -226,59 +230,6 @@ const handlePost = function (request, response) {
       });
     }
 
-
-};
-const deleteItems = function(data){
-  let temp = []
-  outerLoop: data.items.forEach(idx =>{
-    if(idx < groceryList.length){
-    innerLoop: for(let i = 0; i < groceryList.length; i++)
-    {
-      if(i !== idx){
-        temp.push(groceryList[i])
-      }
-      else{
-        groceryList.splice(idx, 1)
-      }
-    }}
-    else{
-      groceryList.splice(idx, 1)
-    }
-  });
-
-  console.log(temp)
-  groceryList.splice(0, groceryList.length);
-  temp.forEach(item =>{
-    groceryList.push(item)
-  });
-
-}
-const handleDelete = function (request, response) {
-
-  let dataString = "";
-
-  request.on("data", function (data) {
-    dataString += data;
-  });
-
-  if(request.url === "/reset"){
-  request.on("end", function () {
-    groceryList.splice(0, groceryList.length);
-    console.log(groceryList)
-    calcTotalPrice();
-    response.writeHead(200, "OK", { "Content-Type": "text/json" });
-    response.end(JSON.stringify(groceryList)); 
-  });}
-  else{
-    request.on("end", function () {
-      deleteItems(JSON.parse(dataString))
-      calcTotalPrice();
-      retObject = { groceryList, totalPrice };
-      console.log(retObject)
-      response.writeHead(200, "OK", { "Content-Type": "text/json" });
-      response.end(JSON.stringify(retObject)); 
-    });
-  }
 
 };
 
